@@ -1,0 +1,147 @@
+/ # hbase shell
+2023-03-19 16:50:10,648 WARN  [main] util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.3.2, r1bedb5bfbb5a99067e7bc54718c3124f632b6e17, Mon Mar 19 18:47:19 UTC 2018
+
+hbase(main):001:0> create 'Resort','hotel','customer'
+0 row(s) in 1.9210 seconds
+
+=> Hbase::Table - Resort
+hbase(main):002:0> list
+TABLE                                                                                                                                                           
+Resort                                                                                                                                                         
+1 row(s) in 0.0590 seconds
+
+=> ["Resort"]
+hbase(main):003:0> put 'Resort','01','hotel:name','taj'
+0 row(s) in 0.3020 seconds
+
+hbase(main):004:0> put 'Resort','01','hotel:location','erode'
+0 row(s) in 0.0280 seconds
+
+hbase(main):005:0> put 'Resort','01','hotel:mobno','1234567890'
+0 row(s) in 0.0250 seconds
+
+hbase(main):006:0> put 'Resort','01','customer:name','raj'
+0 row(s) in 0.0140 seconds
+
+hbase(main):008:0> put 'Resort','01','customer:phno','1246573899'
+0 row(s) in 0.0300 seconds
+
+hbase(main):009:0> put 'Resort','01','customer:roomtype','ac'
+0 row(s) in 0.0140 seconds
+
+hbase(main):010:0> put 'Resort','02','hotel:name','emerald'
+0 row(s) in 0.0190 seconds
+
+hbase(main):011:0> put 'Resort','02','hotel:location','ooty'
+0 row(s) in 0.0220 seconds
+
+hbase(main):012:0> put 'Resort','02','customer:name','madu'
+0 row(s) in 0.0270 seconds
+
+hbase(main):013:0> put 'Resort','02','customer:roomtype','ac'
+0 row(s) in 0.0220 seconds
+
+hbase(main):014:0> put 'Resort','03','hotel:name','lotus'
+0 row(s) in 0.0160 seconds
+
+hbase(main):015:0> put 'Resort','03','hotel:mobno','2315678098'
+0 row(s) in 0.0270 seconds
+
+hbase(main):016:0> put 'Resort','03','customer:name','thara'
+0 row(s) in 0.0250 seconds
+
+
+
+hbase(main):022:0> get 'Resort','01'
+COLUMN                                    CELL                                                                                                                  
+ hotel:name                               timestamp=1678990472589, value=taj                                                                                 
+ hotel:location                           timestamp=1678990435991, value=erode                                                                               
+ hotel:mobno                              timestamp=1678990078779, value=1234567890                                                                              
+ customer:name                            timestamp=1678990151721, value=raj                                                                    
+ customer:phno                            timestamp=1678990107273, value=1246573899                                                                             
+ customer:roomtype                        timestamp=1678989957023, value=ac                                                                               
+                                                                               
+1 row(s) in 0.1660 seconds
+
+hbase(main):023:0> get 'Resort','02'
+COLUMN                                    CELL                                                                                                                  
+ hotel:name                               timestamp=1678990877495, value=emrald                                                                                 
+ hotel:location                           timestamp=1678990697077, value=ooty
+ customer:name                            timestamp=1678990789753, value=madu                                                                            
+ customer:roomtype                        timestamp=1678990632340, value=ac                                                                                   
+1 row(s) in 0.0490 seconds
+
+hbase(main):024:0> get 'Resort','03'
+COLUMN                                    CELL                                                                                                                  
+ hotel:name                               timestamp=1678991191832, value=lotus                                                                              
+ hotel:mobno                              timestamp=1678991043431, value=2315678098                                                                            
+ customer:name                            timestamp=1678990957427, value=thara                                                                             
+1 row(s) in 0.0720 seconds
+
+hbase(main):025:0> scan 'Resort'
+ROW                                       COLUMN+CELL                                                                                                           
+ 01                                       column=hotel:name,timestamp=1678990472589, value=taj                                                       
+ 01                                       column=hotel:location,timestamp=1678990435991, value=erode                                                        
+ 01                                       column=hotel:mobno,timestamp=1678990078779, value=1234567890                                                        
+ 01                                       column=customer:name,timestamp=1678990151721, value=raj                                               
+ 01                                       column=customer:phno,timestamp=1678990107273, value=1246573899                                                   
+ 01                                       column=customer:roomtype,timestamp=1678989957023, value=ac                                                          
+ 02                                       column=hotel:name,timestamp=1678990877495, value=emrald                                                     
+ 02                                       column=hotel:location,timestamp=1678990697077, value=ooty                                                      
+ 02                                       column=customer:name,timestamp=1678990789753, value=madu                                                      
+ 02                                       column=customer:roomtype,timestamp=1678990632340, value=ac                                                 
+ 03                                       column=hotel:name,timestamp=1678991191832, value=lotus                                                   
+ 03                                       column=hotel:mobno,timestamp=1678991043431, value=2315678098 
+ 03                                       column=customer:name,timestamp=1678990957427, value=thara                                                                                      
+3 row(s) in 0.2030 seconds
+
+hbase(main):026:0> put 'Resort','02','hotel:rent','1000'
+0 row(s) in 0.0180 seconds
+
+hbase(main):026:0> delete  'Resort','02','customer:roomtype'
+0 row(s) in 0.0180 seconds
+
+hbase(main):027:0> get 'Resort','02'
+COLUMN                                    CELL                                                                                                                  
+ hotel:name                               timestamp=1678990877495, value=emrald                                                                                 
+ hotel:location                           timestamp=1678990697077, value=ooty
+ customer:name                            timestamp=1678990789753, value=madu                                                                            
+ hotel:rent                               timestamp=1678990632340, value=1000  
+1 row(s) in 0.0900 seconds
+
+hbase(main):030:0> put 'Resort','03','hotel:mobno','9876543211'
+0 row(s) in 0.0870 seconds
+
+hbase(main):030:0> put 'Resort','03','customer:roomtype','non ac'
+0 row(s) in 0.0870 seconds
+
+hbase(main):031:0> get 'Resort','03'
+COLUMN                                    CELL                                                                                                                  
+ hotel:name                               timestamp=1678991191832, value=lotus                                                                               
+ hotel:mobno                              timestamp=1678991043431, value=9876543211                                                                          
+ customer:name                            timestamp=1678990957427, value=thara 
+ customer:roomtype                        timestamp=1678990789753, value=non ac                                             
+1 row(s) in 0.0540 seconds
+
+hbase(main):032:0> scan 'Resort'
+ROW                                       COLUMN+CELL
+ 01                                       column=hotel:name,timestamp=1678990472589, value=taj                                                                                                       
+ 01                                       column=hotel:location,timestamp=1678990435991, value=erode                                                        
+ 01                                       column=hotel:mobno,timestamp=1678990078779, value=1234567890                                                       
+ 01                                       column=customer:name,timestamp=1678990151721, value=raj                                               
+ 01                                       column=customer:phno,timestamp=1678990107273, value=1246573899                                                    
+ 01                                       column=customer:roomtype,timestamp=1678989957023, value=ac                                                           
+ 02                                       column=hotel:name,timestamp=1678990877495, value=emrald                                                      
+ 02                                       column=hotel:location,timestamp=1678990697077, value=ooty                                                      
+ 02                                       column=customer:name,timestamp=1678990789753, value=madu                                                       
+ 02                                       column=customer:rent,timestamp=1678990632340, value=1000 
+ 03                                       column=hotel:name,timestamp=1678991191832, value=lotus      
+ 03                                       column=hotel:mobno,timestamp=1678991043431, value=9876543211                                                     
+ 03                                       column=customer:name,timestamp=1678990957427, value=thara                                                                            
+ 03                                       column=customer:roomtype,timestamp=1678990789753, value=non ac                                                                       
+3 row(s) in 0.1440 seconds
+
+hbase(main):033:0>
