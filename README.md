@@ -5,3 +5,5 @@ Apache Phoenix is commonly used as a SQL layer on top of HBase allowing you to u
 Advantage: 
 This type of distributed and non-relational databases presents a large storage capacity.
 A table within HBase can consist of hundreds of millions of rows and millions of columns. HBase allows professionals to search for different versions, as well as historical data.
+In this table there are three columns hotel customer containing three rows basically
+![image](https://user-images.githubusercontent.com/124451881/226828023-5119572b-b693-4776-b2a1-596b7a17ec6c.png)
